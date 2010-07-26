@@ -1,4 +1,4 @@
-(ns euler-clojure.graph)
+(ns euler.graph)
 
 (defn path [node parents]
   (loop [p ()

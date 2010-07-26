@@ -1,7 +1,7 @@
-(ns euler-clojure.problem-083
-  (:use euler-clojure.core)
-  (:use euler-clojure.matrix)
-  (:use euler-clojure.graph))
+(ns euler.p083
+  (:use euler.core)
+  (:use euler.matrix)
+  (:use euler.graph))
 
 (defn h [graph [n-x n-y] [goal-x goal-y]]
   (+ (abs (- n-x goal-x)) (abs (- n-y goal-y))))

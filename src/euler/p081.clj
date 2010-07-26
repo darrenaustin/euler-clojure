@@ -1,5 +1,5 @@
-(ns euler-clojure.problem-081
-  (:use euler-clojure.matrix))
+(ns euler.p081
+  (:use euler.matrix))
 
 (defn migrate-bottom [matrix]
   (let [bottom (dec (height matrix))]
@@ -35,8 +35,10 @@
                        right (value m [(inc x) y])]
                    (recur (dec x) (set-value m pos (+ current (min down right)))))))))))
 
-(defn solution [matrix]
-  (value (-> matrix migrate-bottom migrate-right migrate-path) [0 0]))
+(defn solution
+  ([] (solution *large-matrix*))
+  ([matrix]
+     (value (-> matrix migrate-bottom migrate-right migrate-path) [0 0])))
 
 ;; An alternate solution using a transient matrix
 (defn solution! [matrix]
