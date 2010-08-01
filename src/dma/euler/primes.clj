@@ -1,32 +1,28 @@
 (ns dma.euler.primes
   (:use dma.euler.numeric))
 
-(defn- cand-index [n] (dec (quot n 2)))
-
-(defn- make-candidates [max]
-  (apply vector (replicate (cand-index max) true)))
-
-(defn- find-next [start candidates]
-  (let [where (cand-index start)]
-    (cond (>= where (count candidates)) nil
-          (nth candidates where) start
-          :else (recur (+ start 2) candidates))))
-
-(defn- mark-multiples [n candidates]
-  (loop [m (cand-index (* n n))
-         c candidates
-         end (count candidates)]
-    (if (>= m end)
-      c
-      (recur (+ m n) (assoc c m false) end))))
-
-(defn- sieve [start candidates]
-  (if-let [next (find-next start candidates)]
-    (lazy-seq
-     (cons next (sieve (+ 2 next) (mark-multiples next candidates))))))
-
-(defn prime-sieve [max]
-  (cons 2 (sieve 3 (make-candidates (int max)))))
+;; Returns a lazy sequence of primes
+;; Shamefully lifted from Christophe Grand's site:
+;; http://clj-me.cgrand.net/2009/07/30/everybody-loves-the-sieve-of-eratosthenes/
+(defn primes []
+  (letfn [(enqueue [sieve n step]
+                   (let [m (+ n step)]
+                     (if (sieve m)
+                       (recur sieve m step)
+                       (assoc sieve m step))))
+          (next-sieve [sieve candidate]
+                      (if-let [step (sieve candidate)]
+                        (-> sieve
+                            (dissoc candidate)
+                            (enqueue candidate step))
+                        (enqueue sieve candidate (+ candidate candidate))))
+          (next-primes [sieve candidate]
+                       (if (sieve candidate)
+                         (recur (next-sieve sieve candidate) (+ candidate 2))
+                         (cons candidate
+                               (lazy-seq (next-primes (next-sieve sieve candidate)
+                                                      (+ candidate 2))))))]
+    (cons 2 (lazy-seq (next-primes {} 3)))))
 
 (defn- times-divisible
   ([n div] (times-divisible n div 0))
@@ -35,10 +31,10 @@
        (recur (/ n div) div (inc times))
        [times n])))
 
-(defn prime-factorization [n & primes]
+(defn prime-factorization [n & ps]
   (loop [factors []
          value n
-         ps (or primes (prime-sieve (inc (Math/sqrt n))))]
+         ps (or ps (primes))]
     (if (or (empty? ps) (> (square (first ps)) value))
       (if (> value 1)
         (conj factors [value 1])
