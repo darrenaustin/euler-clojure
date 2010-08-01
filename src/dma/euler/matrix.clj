@@ -1,4 +1,4 @@
-(ns euler.matrix
+(ns dma.euler.matrix
   (:use clojure.contrib.duck-streams))
 
 (def *small-matrix* [

@@ -1,5 +1,5 @@
-(ns euler.p081
-  (:use euler.matrix))
+(ns dma.euler.p081
+  (:use dma.euler.matrix))
 
 (defn migrate-bottom [matrix]
   (let [bottom (dec (height matrix))]
@@ -35,10 +35,11 @@
                        right (value m [(inc x) y])]
                    (recur (dec x) (set-value m pos (+ current (min down right)))))))))))
 
-(defn solution
-  ([] (solution *large-matrix*))
-  ([matrix]
-     (value (-> matrix migrate-bottom migrate-right migrate-path) [0 0])))
+(defn sum-min-path [matrix]
+  (value (-> matrix migrate-bottom migrate-right migrate-path) [0 0]))
+
+(defn solution {:answer 427337} []
+  (sum-min-path *large-matrix*))
 
 ;; An alternate solution using a transient matrix
 (defn solution! [matrix]

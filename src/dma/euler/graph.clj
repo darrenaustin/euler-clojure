@@ -1,4 +1,4 @@
-(ns euler.graph)
+(ns dma.euler.graph)
 
 (defn path [node parents]
   (loop [p ()
