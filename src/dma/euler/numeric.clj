@@ -4,32 +4,26 @@
 (defn sum [col] (reduce + col))
 (defn product [col] (reduce * col))
 (defn square [x] (* x x))
+(defn cube [x] (* x x x))
 
 (defn div? [n d] (zero? (rem n d)))
 
-(defn floor [n d] (int (/ n d)))
-(defn ceil [n d] (int (Math/ceil (/ n d))))
+(defn whole-nums [] (iterate inc 0))
+(defn natural-nums [] (rest (whole-nums)))
 
-;; (defn whole-nums [] (iterate inc 0))
-;; (defn natural-nums [] (rest (whole-nums)))
+(defn fibs
+  ([] (fibs 0 1))
+  ([a b] (lazy-seq (cons a (fibs b (+ a b))))))
 
-;; (def fibs (lazy-cat [0 1] (map + fibs (rest fibs))))
+(defn triangle-nums
+  ([] (triangle-nums 0 1))
+  ([s n] (lazy-seq (cons (+ s n) (triangle-nums (+ s n) (inc n))))))
 
-;; (defn fibs
-;;   ([] (fibs 0 1))
-;;   ([a b] (lazy-seq (fibs b (+ a b)))))
+(defn take-while-< [max col]
+  (take-while #(< % max) col))
 
-;; (defn triangle-nums
-;;   ([] (triangle-nums 0 1))
-;;   ([s n]
-;;     (let [next (+ s n)]
-;;           (lazy-cons next (triangle-nums next (inc n))))))
-
-;; (defn take-while-< [max col]
-;;   (take-while #(< % max) col))
-
-;; (defn take-between [min max col]
-;;   (take-while #(< % max) (drop-while #(< % min) col)))
+(defn take-between [min max col]
+  (take-while #(< % max) (drop-while #(< % min) col)))
 
 ;; (defn digit->int [d]
 ;;   (- (int d) (int \0)))

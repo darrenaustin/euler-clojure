@@ -26,9 +26,8 @@
   (let [prob-fn-name (problem-fn-sym n)]
           (try
            (require [(problem-ns-sym n) :reload true])
-           (catch Exception ex
-             (println "Execption:" ex)))
-        (resolve prob-fn-name)))
+           (catch Exception ex))
+          (resolve prob-fn-name)))
 
 (defn problem-answer [n]
   (if-let [solution-meta (meta (resolve (problem-fn-sym n)))]
