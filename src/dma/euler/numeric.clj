@@ -1,4 +1,5 @@
-(ns dma.euler.numeric)
+(ns dma.euler.numeric
+  (:use clojure.contrib.math))
 
 (defn natural [max] (range 1 (inc max)))
 (defn sum [col] (reduce + col))
@@ -25,68 +26,61 @@
 (defn take-between [min max col]
   (take-while #(< % max) (drop-while #(< % min) col)))
 
-;; (defn digit->int [d]
-;;   (- (int d) (int \0)))
+(defn- digit->int [d]
+  (- (int d) (int \0)))
 
-;; (defn digits [n]
-;;   (map digit->int (str n)))
+(defn digits [n]
+  (map digit->int (str n)))
 
-;; (defn number [digits]
-;;   (read-string (apply str digits)))
+(defn number [digits]
+  (read-string (apply str digits)))
 
-;; (defn num-digits [n]
-;;   (count (str n)))
+(defn num-digits [n]
+  (count (str n)))
 
-;; (defn palindrome? [num]
-;;   (let [digits (seq (str num))]
-;;         (= digits (reverse digits))))
+(defn palindrome? [num]
+  (let [digits (seq (str num))]
+    (= digits (reverse digits))))
 
-;; (defn n-digits [n]
-;;   (range (int (. Math pow 10 (dec n)))
-;;                  (int (. Math pow 10 n))))
+(defn n-digits [n]
+   (range (int (Math/pow 10 (dec n)))
+          (int (Math/pow 10 n))))
 
-;; (defn exp [x n]
-;;   (reduce * (take n (repeat x))))
+(defn exp [x n]
+  (reduce * (take n (repeat x))))
 
-;; (defn factorial [n]
-;;   (reduce * (range 2 (inc n))))
+(defn factorial [n]
+  (reduce * (range 2 (inc n))))
 
-;; (defn find-first [pred col]
-;;   (first (filter pred col)))
+(defn divisors [n]
+   (reduce
+    (fn [ds d]
+      (let [f (/ n d)]
+        (if (= f d)
+          (conj ds d)
+          (conj ds f d))))
+    []
+    (filter #(div? n %) (range 1 (inc (ceil (Math/sqrt n)))))))
 
-;; (defn proper-divisors [n]
-;;   (if (= n 1) [1]
-;;     (loop [ds [1]
-;;                    current 2
-;;                    end (int (. Math sqrt n))]
-;;           (cond
-;;            (> current end) ds
-;;            (div? n current)
-;;              (let [factor (/ n current)]
-;;                    (recur (into ds (if (= factor current) [factor] [factor current]))
-;;                                   (inc current)
-;;                                   end))
-;;            :else (recur ds (inc current) end)))))
+(defn proper-divisors [n]
+  (rest (divisors n)))
 
-;; (defn divisors [n]
-;;   (conj (proper-divisors n) n))
+(defn sum-divisors [n]
+  (sum (proper-divisors n)))
 
-;; (defn sum-divisors [n]
-;;   (sum (proper-divisors n)))
+(defn perfect? [n]
+  (= n (sum-divisors n)))
 
-;; (defn perfect? [n]
-;;   (= n (sum-divisors n)))
+(defn abundant? [n]
+  (> (sum-divisors n) n))
 
-;; (defn abundant? [n]
-;;   (> (sum-divisors n) n))
+(defn deficient? [n]
+  (< (sum-divisors n) n))
 
-;; (defn deficient? [n]
-;;   (< (sum-divisors n) n))
-
-;; (defn amicable? [a]
-;;   (let [b (sum-divisors a)]
-;;         (and (not= a b)
-;;                  (= a (sum-divisors b)))))
+(defn amicable? [a]
+  (let [b (sum-divisors a)]
+    (and (not= a b)
+         (= a (sum-divisors b)))))
 
 ;; (defn intersect [as bs]
 ;;   "Intersect two sorted sequences of numbers"
