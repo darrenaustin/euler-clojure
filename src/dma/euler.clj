@@ -5,7 +5,7 @@
 (defn format-solution [solution]
   (when solution
     (let [secs (/ (solution :time) 1000000000.0)]
-      (format "Problem %3d: %12s (%03.2f sec%s) [ %s ]"
+      (format "Problem %3d: %12s (%5.2f sec%s) [ %s ]"
               (solution :prob-num)
               (solution :solution)
               secs
