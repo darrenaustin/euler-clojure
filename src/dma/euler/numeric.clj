@@ -52,18 +52,27 @@
 (defn factorial [n]
   (reduce * (range 2 (inc n))))
 
-(defn divisors [n]
-   (reduce
-    (fn [ds d]
-      (let [f (/ n d)]
-        (if (= f d)
-          (conj ds d)
-          (conj ds f d))))
-    []
-    (filter #(div? n %) (range 1 (inc (ceil (Math/sqrt n)))))))
-
 (defn proper-divisors [n]
-  (rest (divisors n)))
+  (let [end (int (Math/sqrt n))]
+    (loop [ds [1] current 2]
+      (cond
+       (> current end) ds
+       (div? n current)
+         (let [factor (/ n current)]
+           (if (= factor current)
+             (recur (conj ds factor) (inc current))
+             (recur (conj ds current factor) (inc current))))
+       :else (recur ds (inc current))))))
+
+;; Cleaner, but slower version than above looping construct
+;; (defn proper-divisors [n]
+;;   (apply concat [1]
+;;          (for [d (filter #(div? n %) (range 2 (inc (floor (Math/sqrt n)))))]
+;;            (let [f (/ n d)]
+;;              (if (= f d) [d] [d f])))))
+
+(defn divisors [n]
+  (conj (proper-divisors n) n))
 
 (defn sum-divisors [n]
   (sum (proper-divisors n)))
