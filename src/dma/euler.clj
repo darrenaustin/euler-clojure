@@ -1,5 +1,7 @@
 (ns dma.euler)
 
+(def *problem-nums* (range 1 (inc 299)))
+
 (defstruct solution :prob-num :solution :answer :time)
 
 (defn format-solution [solution]
@@ -30,8 +32,9 @@
           (resolve prob-fn-name)))
 
 (defn problem-answer [n]
-  (if-let [solution-meta (meta (resolve (problem-fn-sym n)))]
-    (solution-meta :answer)))
+  (if-let [solution-fn (find-solution-fn n)]
+    (if-let [solution-meta (meta (resolve (problem-fn-sym n)))]
+      (solution-meta :answer))))
 
 (defn solve [n]
   (if-let [solution-fn (find-solution-fn n)]
@@ -41,12 +44,15 @@
       (struct solution n result answer
               (- (. System nanoTime) start-time)))))
 
-(defn euler-if-solved [n]
-  (if-let [solution-fn (find-solution-fn n)]
-    (if (problem-answer n)
-      (println (format-solution (solve n))))))
+(defn euler-if-known [n]
+  (when (problem-answer n)
+    (println (format-solution (solve n)))))
+
+(defn euler-unsolved []
+  (for [n *problem-nums* :when (not (problem-answer n))] n))
 
 (defn euler
   ([]
-   (dorun (map euler-if-solved (range 1 300))) nil)
+   (dorun (map euler-if-known *problem-nums*)))
   ([n] (println (format-solution (solve n)))))
+
