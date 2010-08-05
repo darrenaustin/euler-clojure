@@ -24,6 +24,11 @@
                                                       (+ candidate 2))))))]
     (cons 2 (lazy-seq (next-primes {} 3)))))
 
+(defn prime?
+  ([n] (prime? n (primes)))
+  ([n primes]
+     (= n (first (drop-while-< n primes)))))
+
 (defn- times-divisible
   ([n div] (times-divisible n div 0))
   ([n div times]
@@ -49,3 +54,4 @@
 
 (defn prime-factors [n]
   (map first (prime-factorization n)))
+

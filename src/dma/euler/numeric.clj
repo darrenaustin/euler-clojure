@@ -23,6 +23,9 @@
 (defn take-while-< [max col]
   (take-while #(< % max) col))
 
+(defn drop-while-< [max col]
+  (drop-while #(< % max) col))
+
 (defn take-between [min max col]
   (take-while #(< % max) (drop-while #(< % min) col)))
 
