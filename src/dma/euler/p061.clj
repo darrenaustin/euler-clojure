@@ -43,7 +43,7 @@
         (for [next-end (t last-end)]
           (find-cycles next-end (disj types t) (conj cycle (full-num last-end next-end)))))))))
 
-(defn solution {:answer nil} []
+(defn solution {:answer 28684} []
   (let [types (sorted-set-by #(< (count %1) (count %2))
                              (four-digit-map triangle)
                              (four-digit-map square)
