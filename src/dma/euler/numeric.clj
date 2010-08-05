@@ -29,7 +29,7 @@
 (defn take-between [min max col]
   (take-while #(< % max) (drop-while #(< % min) col)))
 
-(defn- digit->int [d]
+(defn digit->int [d]
   (- (int d) (int \0)))
 
 (defn digits [n]
