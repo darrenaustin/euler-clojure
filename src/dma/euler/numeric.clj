@@ -40,9 +40,9 @@
 (defn num-digits [n]
   (count (str n)))
 
-(defn palindrome? [num]
-  (let [digits (seq (str num))]
-    (= digits (reverse digits))))
+(defn palindrome? [x]
+  (let [s (seq (str x))]
+    (= s (reverse s))))
 
 (defn n-digits [n]
    (range (int (Math/pow 10 (dec n)))

@@ -1,6 +1,8 @@
 (ns dma.euler.p061
   (:use dma.euler.numeric))
 
+;; TODO: find a cleaner way to do this
+
 (defn triangle   [n] (/ (* n (inc n)) 2))
 (defn pentagonal [n] (/ (* n (dec (* 3 n))) 2))
 (defn hexagonal  [n] (* n (dec (* 2 n))))
