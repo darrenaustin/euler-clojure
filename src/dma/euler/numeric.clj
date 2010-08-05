@@ -33,7 +33,7 @@
   (map digit->int (str n)))
 
 (defn number [digits]
-  (read-string (apply str digits)))
+  (read-string (apply str (drop-while #(zero? %) digits))))
 
 (defn num-digits [n]
   (count (str n)))
@@ -102,22 +102,3 @@
 ;;      (intersect as (rest bs))
 ;;    :else
 ;;          (intersect (rest as) bs)))
-
-;; (defn gcd [a b]
-;;   "Geatest common divisor between a and b."
-;;   (apply max (intersect (sort (divisors a))
-;;                                                 (sort (divisors b)))))
-
-;; (defn lcm [a b]
-;;   "Least common multiple for a and b"
-;;   (/ (* a b) (gcd a b)))
-
-;; (defn combinations [& cs]
-;;   (reduce (fn [vs c] (mapcat #(map conj vs (repeat %)) c)) [[]] cs))
-
-;; (defn permutations [s]
-;;   (if (= 1 (count s))
-;;         (list s)
-;;         (for [head s
-;;                   tail (permutations (disj (set s) head))]
-;;           (cons head tail))))
