@@ -40,10 +40,8 @@
       (when (= start end)
         cycle))
     (find-first
-     (for [t types]
-       (find-first
-        (for [next-end (t last-end)]
-          (find-cycles next-end (disj types t) (conj cycle (full-num last-end next-end)))))))))
+     (for [t types, next-end (t last-end)]
+       (find-cycles next-end (disj types t) (conj cycle (full-num last-end next-end)))))))
 
 (defn solution {:answer 28684} []
   (let [types (sorted-set-by #(< (count %1) (count %2))
@@ -58,8 +56,6 @@
         starts (keys start-type)]
     (sum
      (find-first
-      (for [start starts]
-        (find-first
-         (for [end (start-type start)]
-           (find-cycles end types-left [(full-num start end)]))))))))
+      (for [start starts, end (start-type start)]
+        (find-cycles end types-left [(full-num start end)]))))))
 
