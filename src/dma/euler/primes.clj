@@ -1,5 +1,5 @@
 (ns dma.euler.primes
-  (:use dma.euler.numeric))
+  (:use dma.euler.numeric clojure.contrib.math))
 
 ;; Returns a lazy sequence of primes
 ;; Shamefully lifted from Christophe Grand's site:
@@ -24,10 +24,15 @@
                                                       (+ candidate 2))))))]
     (cons 2 (lazy-seq (next-primes {} 3)))))
 
-(defn prime?
-  ([n] (prime? n (primes)))
-  ([n primes]
-     (= n (first (drop-while-< n primes)))))
+(defn simple-brute-force-prime? [n]
+  (cond (< n 2) false
+        (< n 4) true
+        :else (every? identity (for [x (range 3 (inc (sqrt n)) 2)]
+                                 (not (div? n x))))))
+
+(defn prime? [n]
+  (and (.isProbablePrime (bigint n) 1)
+       (simple-brute-force-prime? n)))
 
 (defn- times-divisible
   ([n div] (times-divisible n div 0))
