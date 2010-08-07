@@ -24,7 +24,7 @@
                                                       (+ candidate 2))))))]
     (cons 2 (lazy-seq (next-primes {} 3)))))
 
-(defn simple-brute-force-prime? [n]
+(defn- simple-brute-force-prime? [n]
   (cond (< n 2) false
         (< n 4) true
         :else (every? identity (for [x (range 3 (inc (sqrt n)) 2)]
@@ -44,7 +44,7 @@
 (defn prime-factorization [n & ps]
   (loop [factors []
          value n
-         ps (or ps (primes))]
+         ps (or (first ps) (primes))]
     (if (or (empty? ps) (> (square (first ps)) value))
       (if (> value 1)
         (conj factors [value 1])
