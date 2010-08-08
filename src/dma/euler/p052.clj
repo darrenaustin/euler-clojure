@@ -1,4 +1,4 @@
-(ns dma.euler.p051
+(ns dma.euler.p052
   (:use dma.euler.numeric))
 
 (defn same-digits? [nums]
