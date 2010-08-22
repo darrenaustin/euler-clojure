@@ -21,4 +21,4 @@
     (first
      (filter identity
       (map #(pandigital-concat (number %) digits)
-           (reverse (choose d 4)))))))
+           (reverse (choose digits 4)))))))
