@@ -18,3 +18,20 @@
       (if (zero? comparison)
         (compare-seqs (rest s1) (rest s2))
         comparison))))
+
+(defmacro timings [n expr]
+  `(let [results# (for [x# (range ~n)
+                        :let [start# (System/nanoTime)
+                              ret# ~expr]]
+                    [ret# (- (System/nanoTime) start#)])
+         times# (map (fn [result#] (/ (second result#) 1000000000.0)) results#)
+         high# (apply max times#)
+         low# (apply min times#)
+         average# (if (> ~n 2)
+                    (/ (- (reduce + times#) high# low#) (- ~n 2))
+                    (/ (reduce + times#) ~n))]
+     {:average average#, :result (ffirst results#), :high high#, :low low#, :times times#}))
+
+(defmacro avg-time [n expr]
+  `(let [results# (timings ~n ~expr)]
+     (results# :average)))
