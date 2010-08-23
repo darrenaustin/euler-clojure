@@ -1,6 +1,6 @@
 (ns dma.euler.p054
   (:refer-clojure :exclude [flush])
-  (:use [dma.euler numeric util] clojure.contrib.duck-streams))
+  (:use [dma.euler numeric util] [clojure.contrib.duck-streams :only [read-lines]]))
 
 (defstruct card :value :suit :sort-value)
 

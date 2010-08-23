@@ -1,5 +1,5 @@
 (ns dma.euler.matrix
-  (:use clojure.contrib.duck-streams))
+  (:use [clojure.contrib.duck-streams :only [read-lines]]))
 
 (def *small-matrix* [
    [131,673,234,103, 18]

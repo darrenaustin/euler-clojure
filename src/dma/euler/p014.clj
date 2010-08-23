@@ -1,5 +1,5 @@
 (ns dma.euler.p014
-  (:use dma.euler.numeric clojure.contrib.seq-utils))
+  (:use dma.euler.numeric [clojure.contrib.seq-utils :only (indexed)]))
 
 (defn collatz-count [n]
   (loop [c 1 n n]
