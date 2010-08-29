@@ -1,4 +1,5 @@
-(ns dma.euler)
+(ns dma.euler
+  (:gen-class))
 
 (def *problem-nums* (range 1 (inc 299)))
 
@@ -44,7 +45,7 @@
       (struct solution n result answer
               (- (. System nanoTime) start-time)))))
 
-(defn euler-if-known [n]
+(defn solve-if-known [n]
   (when (problem-answer n)
     (println (format-solution (solve n)))))
 
@@ -52,7 +53,8 @@
   (for [n *problem-nums* :when (not (problem-answer n))] n))
 
 (defn euler
-  ([]
-   (dorun (map euler-if-known *problem-nums*)))
+  ([] (dorun (map solve-if-known *problem-nums*)))
   ([n] (println (format-solution (solve n)))))
 
+(defn -main [& args]
+  (euler))
