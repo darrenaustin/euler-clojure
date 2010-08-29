@@ -5,10 +5,7 @@
   (apply sorted-set (map str (take-between (exp 10 (dec n)) (exp 10 n) primes))))
 
 (defn n-digit-masks [n]
-  (map #(let [m (Integer/toBinaryString %), ds (count m)]
-          (if (< ds n)
-            (concat (repeat (- n ds) \0) m)
-            m))
+  (map #(format (str "%" n "s") (Integer/toBinaryString %))
        (range 1 (exp 2 n))))
 
 (defn matches-mask? [ds mask]
