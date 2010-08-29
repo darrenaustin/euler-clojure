@@ -1,7 +1,6 @@
 (ns dma.euler.numeric
   (:use clojure.contrib.math))
 
-(defn natural [max] (range 1 (inc max)))
 (defn sum [col] (reduce + col))
 (defn product [col] (reduce * col))
 (defn square [x] (* x x))
