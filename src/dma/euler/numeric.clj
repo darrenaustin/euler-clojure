@@ -36,9 +36,7 @@
   (map digit->int (str n)))
 
 (defn number [digits]
-  (read-string (apply str (drop-while #(or (and (char? %) (= % \0))
-                                           (and (number? %) (zero? %)))
-                                      digits))))
+  (read-string (apply str (cons "10r" digits))))
 
 (defn num-digits [n]
   (count (str n)))
