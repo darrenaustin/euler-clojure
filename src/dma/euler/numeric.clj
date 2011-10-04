@@ -1,8 +1,8 @@
 (ns dma.euler.numeric
   (:use clojure.contrib.math))
 
-(defn sum [col] (reduce + col))
-(defn product [col] (reduce * col))
+(defn sum [col] (apply + col))
+(defn product [col] (apply * col))
 (defn square [x] (* x x))
 (defn cube [x] (* x x x))
 
@@ -54,10 +54,10 @@
            (int (Math/pow 10 n)))))
 
 (defn exp [x n]
-  (reduce * (take n (repeat x))))
+  (apply * (take n (repeat x))))
 
 (defn factorial [n]
-  (reduce * (range 2 (inc n))))
+  (apply * (range 2 (inc n))))
 
 (defn proper-divisors [n]
   (let [end (int (Math/sqrt n))]

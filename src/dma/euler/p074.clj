@@ -1,25 +1,26 @@
 (ns dma.euler.p074
   (:use dma.euler.numeric))
 
-(def digit-fact (vec (map factorial (range 10))))
+(def digit-factorial (vec (map factorial (range 10))))
 
-(defn sum-digit-fact [n]
-  (sum (map digit-fact (digits n))))
+(defn sum-factorial-digits [n]
+  (sum (map digit-factorial (digits n))))
 
 (def chain-length
      (let [chains (atom {})]
-       (letfn [(update-lengths [chain length]
-                  (when (seq chain)
-                    (let [new-chains (apply assoc @chains (interleave chain (repeat length)))]
-                      (reset! chains new-chains)))
-                  length)
-               (chain-length [n chain]
+       (letfn [(update-lengths! [chain length]
+                 (loop [c chain l length]
+                   (when (seq c)
+                     (swap! chains assoc (first c) (inc l))
+                     (recur (rest c) (inc l))))
+                 (+ length (count chain)))
+               (chain-length [n chain seen]
                   (if-let [n-length (@chains n)]
-                    (update-lengths chain (+ n-length (count chain)))
-                    (if (chain n)
-                      (update-lengths chain (count chain))
-                      (recur (sum-digit-fact n) (conj chain n)))))]
-         (fn [n] (chain-length n #{})))))
+                    (update-lengths! chain n-length)
+                    (if (seen n)
+                      (update-lengths! chain 0)
+                      (recur (sum-factorial-digits n) (conj chain n) (conj seen n)))))]
+         (fn [n] (chain-length n () #{})))))
 
 (defn solution {:answer 402} []
-  (count (filter #(= % 60) (map chain-length (range 1000000)))))
+  (count (filter #(= 60 (chain-length %)) (range 1000000))))
