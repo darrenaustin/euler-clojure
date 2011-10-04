@@ -28,11 +28,15 @@
 (defn take-between [min max col]
   (take-while #(< % max) (drop-while #(< % min) col)))
 
-(defn digit->int [d]
-  (- (int d) (int \0)))
-
-(defn digits [n]
-  (map digit->int (str n)))
+(defn digits
+  ([n] (map #(- (int %) (int \0)) (str n)))
+  ([n num-digits]
+     (let [ds (digits n) used (count ds)]
+       (if (> num-digits used)
+         ;; pad the digit sequence with enough leading 0s to fill
+         ;; num-digits
+         (concat (repeat (- num-digits used) 0) ds)
+         ds))))
 
 (defn number [digits]
   (read-string (apply str (cons "10r" digits))))
@@ -45,8 +49,9 @@
     (= s (reverse s))))
 
 (defn n-digits [n]
-   (range (int (Math/pow 10 (dec n)))
-          (int (Math/pow 10 n))))
+  (when (> n 0)
+    (range (int (Math/pow 10 (dec n)))
+           (int (Math/pow 10 n)))))
 
 (defn exp [x n]
   (reduce * (take n (repeat x))))
