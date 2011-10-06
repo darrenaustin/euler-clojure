@@ -18,6 +18,25 @@ problems yourself, looking at my solutions may spoil it for you.  Feel
 free to use these solutions if you wish... only cheating yourself,
 blah, blah.
 
+## Usage
+
+Currently this project requires Clojure 1.2.  I will update it to 1.3
+sometime soon.  I use `lein swank` to get a REPL up and running with the 
+right environment setup.  To run the solutions:
+
+    user> (use 'dma.euler)
+    user> (euler)
+  
+This will run all of the solutions giving the result, whether it was correct
+and how long it took (with a warning if it was over a minute... gotta keep
+myself honest :).
+
+You can also run just a specific problem by giving the problem number
+to the `euler` function:
+
+    user> (euler 42)
+    
+
 ## Problems to migrate from Ruby project
 
 I originally started with Project Euler as a way to learn Ruby.  I
