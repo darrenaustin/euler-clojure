@@ -45,7 +45,6 @@ in many cases the Clojure solution is very different from how I solved
 it in Ruby.  Here is my migration TODO list.  Problems I have solved
 in Ruby, but not yet in Clojure:
 
-* 92
 * 96
 * 97
 * 98
