@@ -1,10 +1,10 @@
 # euler-clojure
 
 Darren's solutions to the [Project Euler][1] problems written in the
-[Clojure][2] programming language.  I am doing this mostly for fun and
-to do a little axe sharpening.  It is a great way to learn a new
-programming language and excercise some math muscles (although some of
-the math involved was new to me).
+[Clojure][2] programming language.  I am doing this for fun and
+profit.  But mostly fun.  It is a great way to learn a new programming
+language and excercise some math muscles (although some of the math
+involved was new to me).
 
 Given that, these are just my solutions to the problems.  There may be
 cleaner, or more idiomattic ways to do this in Clojure (if so, please
