@@ -20,25 +20,7 @@
   (count matrix))
 
 (defn value [matrix [x y]]
-  (-> matrix (nth y) (nth x)))
+  (get-in matrix [y x]))
 
 (defn set-value [matrix [x y] value]
-  (assoc matrix y (assoc (nth matrix y) x value)))
-
-
-;; Support for building and manipulating transient matrices
-(defn transient-matrix [matrix]
-  (let [m (transient matrix)]
-    (doall
-     (for [y (range 0 (count m))]
-       (assoc! m y (transient (nth m y)))))
-    m))
-
-(defn set-value! [matrix [x y] value]
-  (assoc! matrix y (assoc! (nth matrix y) x value)))
-
-(defn persistent-matrix! [matrix]
-  (doall
-   (for [y (range 0 (count matrix))]
-       (assoc! matrix y (persistent! (nth matrix y)))))
-  (persistent! matrix))
+  (update-in matrix [y x] (constantly value)))

@@ -1,5 +1,6 @@
 (ns dma.euler.p083
-  (:use (dma.euler matrix graph)))
+  (:use (dma.euler matrix graph))
+  (:use clojure.contrib.math))
 
 (defn h [graph [n-x n-y] [goal-x goal-y]]
   (+ (abs (- n-x goal-x)) (abs (- n-y goal-y))))
