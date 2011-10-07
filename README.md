@@ -46,7 +46,6 @@ it in Ruby.  Here is my migration TODO list.  Problems I have solved
 in Ruby, but not yet in Clojure:
 
 * 96
-* 98
 * 99
 * 111
 * 114
