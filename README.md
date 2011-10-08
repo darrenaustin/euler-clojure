@@ -37,6 +37,13 @@ to the `euler` function:
     user> (euler 42)
     
 
+## TODO list
+* Migrate to 1.3
+* Clean up numeric.clj
+* Clean up :use clauses to only specify exactly what is being used in
+  each file
+* Solve the rest of the problems :)
+
 ## Problems to migrate from Ruby project
 
 I originally started with Project Euler as a way to learn Ruby.  I
@@ -46,7 +53,6 @@ it in Ruby.  Here is my migration TODO list.  Problems I have solved
 in Ruby, but not yet in Clojure:
 
 * 96
-* 99
 * 111
 * 114
 * 115
