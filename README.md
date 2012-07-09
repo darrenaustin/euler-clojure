@@ -38,7 +38,8 @@ to the `euler` function:
     
 
 ## TODO list
-* Migrate to 1.3
+* Migrate to 1.4
+* Figure out why 87 is now running out of memory.
 * Clean up numeric.clj
 * Clean up :use clauses to only specify exactly what is being used in
   each file
