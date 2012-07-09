@@ -1,6 +1,6 @@
 # euler-clojure
 
-Darren's solutions to the [Project Euler][1] problems written in the
+My solutions to the [Project Euler][1] problems written in the
 [Clojure][2] programming language.  I am doing this for fun and
 profit.  But mostly fun.  It is a great way to learn a new programming
 language and excercise some math muscles (although some of the math
