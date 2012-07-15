@@ -8,7 +8,7 @@
   (first
    (for [a (range 2 (int (/ n 2)))
          b (range a n)
-         :when (= n (+ a b (pythagorean-c a b)))]
+         :when (== n (+ a b (pythagorean-c a b)))]
      [a b (int (pythagorean-c a b))])))
 
 (defn solution {:answer 31875000} []

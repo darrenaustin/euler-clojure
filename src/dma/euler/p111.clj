@@ -24,7 +24,8 @@
                       :else (assoc m digit {:max repeats :sum n}))))
             m repeat-digits)))
 
-(defn solution {:answer nil} []
+;; TODO: get this working
+(defn solution- {:answer nil} []
   (let [max-digit-map (reduce update-max-digit-map {} (n-digit-primes 10))]
     (sum (map #(get-in max-digit-map [% :sum]) (range 10)))))
 

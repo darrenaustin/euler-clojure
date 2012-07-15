@@ -1,5 +1,5 @@
 (ns dma.euler.primes
-  (:use dma.euler.numeric clojure.contrib.math))
+  (:use dma.euler.numeric))
 
 ;; Returns a lazy sequence of primes
 ;; Shamefully lifted from Christophe Grand's site:
@@ -27,11 +27,11 @@
 (defn- simple-brute-force-prime? [n]
   (cond (< n 2) false
         (< n 4) true
-        :else (every? identity (for [x (range 3 (inc (sqrt n)) 2)]
+        :else (every? identity (for [x (range 3 (inc (Math/sqrt n)) 2)]
                                  (not (div? n x))))))
 
 (defn prime? [n]
-  (and (.isProbablePrime (bigint n) 1)
+  (and (.isProbablePrime (BigInteger/valueOf n) 1)
        (simple-brute-force-prime? n)))
 
 (defn- times-divisible
@@ -59,4 +59,3 @@
 
 (defn prime-factors [n]
   (map first (prime-factorization n)))
-

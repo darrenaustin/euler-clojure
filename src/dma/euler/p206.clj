@@ -1,5 +1,5 @@
 (ns dma.euler.p206
-  (:use dma.euler.numeric clojure.contrib.math))
+  (:use dma.euler.numeric clojure.math.numeric-tower))
 
 ;; Analyzing the problem, we know that the target number must end
 ;; in a 0 in order for the square to end in a 0.  Also the next

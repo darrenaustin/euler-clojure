@@ -1,6 +1,6 @@
 (ns dma.euler.p098
   (:use dma.euler.numeric)
-  (:use clojure.contrib.combinatorics))
+  (:use clojure.math.combinatorics))
 
 (defn has-repeating-digits? [n]
   (not= (count (distinct (str n)))

@@ -1,6 +1,6 @@
 (ns dma.euler.p054
   (:refer-clojure :exclude [flush])
-  (:use [dma.euler numeric util] [clojure.contrib.duck-streams :only [read-lines]]))
+  (:use [dma.euler numeric util] [clojure.java io]))
 
 (defstruct card :value :suit :sort-value)
 
@@ -119,7 +119,9 @@
       compare-scores)))
 
 (defn solution {:answer 376} []
-  (let [hands (for [line (read-lines "data/poker.txt")]
-                (vec (map create-hand (partition 5 (.split line " ")))))]
+  (let [hands 
+         (with-open [rdr (reader "data/poker.txt")]
+           (doall (for [line (line-seq rdr)]
+                    (vec (map create-hand (partition 5 (.split line " ")))))))]
     (count
      (filter #(= (compare-hands (first %) (second %)) 1) hands))))

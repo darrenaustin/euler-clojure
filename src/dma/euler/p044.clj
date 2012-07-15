@@ -1,5 +1,4 @@
-(ns dma.euler.p044
-  (:use dma.euler.numeric clojure.contrib.math))
+(ns dma.euler.p044)
 
 (defn pentagonal [n]
   (/ (* n (dec (* 3 n))) 2))

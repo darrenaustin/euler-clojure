@@ -1,7 +1,6 @@
-(ns dma.euler.matrix
-  (:use [clojure.contrib.duck-streams :only [read-lines]]))
+(ns dma.euler.matrix)
 
-(def *small-matrix* [
+(def small-matrix [
    [131,673,234,103, 18]
    [201, 96,342,965,150]
    [630,803,746,422,111]
@@ -9,8 +8,8 @@
    [805,732,524, 37,331]
    ])
 
-(def *large-matrix*
-     (into [] (for [line (read-lines "data/matrix.txt")]
+(def large-matrix
+  (into [] (for [line (into [] (.split (slurp "data/matrix.txt") "\n"))]
                 (into [] (map #(Integer/parseInt %) (.split line ","))))))
 
 (defn width [matrix]

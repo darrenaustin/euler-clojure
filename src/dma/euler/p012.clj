@@ -1,8 +1,8 @@
 (ns dma.euler.p012
-  (:use dma.euler.numeric [clojure.contrib.seq-utils :only (find-first)]))
+  (:use dma.euler.numeric))
 
 (defn solution {:answer 76576500} []
-  (find-first #(< 500 (count (divisors %))) (triangle-nums)))
+  (first (filter #(< 500 (count (divisors %))) (triangle-nums))))
 
 
 

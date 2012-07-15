@@ -1,6 +1,6 @@
 (ns dma.euler.p085
   (:use dma.euler.numeric)
-  (:use clojure.contrib.math))
+  (:use clojure.math.numeric-tower))
 
 ;; For a given W x H grid, a rectangle will have W+1 vertical grid
 ;; lines and H+1 horizontal grid lines.  Any given rectangle in this

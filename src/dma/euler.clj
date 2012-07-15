@@ -1,7 +1,8 @@
 (ns dma.euler
-  (:gen-class))
+  (:gen-class)
+  (:import java.io.FileNotFoundException))
 
-(def *problem-nums* (range 1 (inc 299)))
+(def problem-nums (range 1 (inc 299)))
 
 (defstruct solution :prob-num :solution :answer :time)
 
@@ -29,7 +30,7 @@
   (let [prob-fn-name (problem-fn-sym n)]
           (try
            (require [(problem-ns-sym n) :reload true])
-           (catch Exception ex))
+           (catch FileNotFoundException ex))
           (resolve prob-fn-name)))
 
 (defn problem-answer [n]
@@ -50,10 +51,10 @@
     (println (format-solution (solve n)))))
 
 (defn euler-unsolved []
-  (for [n *problem-nums* :when (not (problem-answer n))] n))
+  (for [n problem-nums :when (not (problem-answer n))] n))
 
 (defn euler
-  ([] (dorun (map solve-if-known *problem-nums*)))
+  ([] (dorun (map solve-if-known problem-nums)))
   ([n] (println (format-solution (solve n)))))
 
 (defn -main [& args]

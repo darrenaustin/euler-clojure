@@ -2,7 +2,7 @@
   (:use dma.euler.numeric))
 
 (defn sum-with-reverse [n]
-  (+ n (number (reverse (digits n)))))
+  (+' n (number (reverse (digits n)))))
 
 (defn lychrel?
   ([n] (lychrel? n 0))

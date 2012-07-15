@@ -9,5 +9,6 @@
 (defn f [n]
   (reduce (fn [tf x] (trim-trailing-zeros (* tf x))) (range 2 (inc n))))
 
-(defn solution {:answer nil} []
+;; TODO: get this working
+(defn solution- {:answer nil} []
   (f 1000000000000))

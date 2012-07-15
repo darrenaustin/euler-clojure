@@ -1,6 +1,6 @@
 (ns dma.euler.p083
   (:use (dma.euler matrix graph))
-  (:use clojure.contrib.math))
+  (:use clojure.math.numeric-tower))
 
 (defn h [graph [n-x n-y] [goal-x goal-y]]
   (+ (abs (- n-x goal-x)) (abs (- n-y goal-y))))
@@ -20,4 +20,4 @@
     (reduce + (map #(value matrix %) path))))
 
 (defn solution {:answer 425185} []
-  (sum-min-path *large-matrix*))
+  (sum-min-path large-matrix))

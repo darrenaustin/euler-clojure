@@ -1,5 +1,5 @@
 (ns dma.euler.p032
-  (:use dma.euler.numeric clojure.contrib.combinatorics))
+  (:use dma.euler.numeric clojure.math.combinatorics))
 
 (defn solution {:answer 45228} []
   (sum

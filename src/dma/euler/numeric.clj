@@ -1,5 +1,4 @@
-(ns dma.euler.numeric
-  (:use clojure.contrib.math))
+(ns dma.euler.numeric)
 
 (defn sum [col] (apply + col))
 (defn product [col] (apply * col))
@@ -13,7 +12,7 @@
 
 (defn fibs
   ([] (fibs 0 1))
-  ([a b] (lazy-seq (cons a (fibs b (+ a b))))))
+  ([a b] (lazy-seq (cons a (fibs b (+' a b))))))
 
 (defn triangle-nums
   ([] (triangle-nums 0 1))
@@ -28,8 +27,11 @@
 (defn take-between [min max col]
   (take-while #(< % max) (drop-while #(< % min) col)))
 
+(defn digit->int [digit]
+  (- (int digit) (int \0)))
+
 (defn digits
-  ([n] (map #(- (int %) (int \0)) (str n)))
+  ([n] (map digit->int (str n)))
   ([n num-digits]
      (let [ds (digits n) used (count ds)]
        (if (> num-digits used)
@@ -53,11 +55,12 @@
     (range (int (Math/pow 10 (dec n)))
            (int (Math/pow 10 n)))))
 
+;; TODO: use the expt from math.numeric-tower?
 (defn exp [x n]
-  (apply * (take n (repeat x))))
+  (apply *' (take n (repeat x))))
 
 (defn factorial [n]
-  (apply * (range 2 (inc n))))
+  (apply *' (range 2 (inc n))))
 
 (defn proper-divisors [n]
   (let [end (int (Math/sqrt n))]

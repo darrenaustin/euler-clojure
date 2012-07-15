@@ -1,5 +1,5 @@
 (ns dma.euler.p041
-  (:use [dma.euler numeric primes] clojure.contrib.combinatorics))
+  (:use [dma.euler numeric primes] clojure.math.combinatorics))
 
 ;; We can start with 7 digit numbers, because if the sum of a number's
 ;; digits are divisible by 3 the number itself is divisible by 3.

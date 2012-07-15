@@ -1,5 +1,5 @@
 (ns dma.euler.p014
-  (:use dma.euler.numeric [clojure.contrib.seq-utils :only (indexed)]))
+  (:use dma.euler.numeric))
 
 (defn collatz-count [n]
   (loop [c 1 n n]
@@ -9,4 +9,4 @@
 
 (defn solution {:answer 837799} []
   (first (reduce #(if (> (second %2) (second %1)) %2 %1)
-                 (indexed (map collatz-count (range 0 1000000))))))
+                 (map list (range) (map collatz-count (range 0 1000000))))))

@@ -1,6 +1,6 @@
 (ns dma.euler.p096)
 
-(defn cross [A B f]
+(defn cross [A B]
   (for [a A b B] (str a b)))
 
 (def digits "123456789")
@@ -29,6 +29,7 @@
                       (map #(or % \space) (puzzle y)))))
     (println row-divider)))
 
-(defn solution {:answer 24702} []
+;; TODO: finish this
+(defn solution- {:answer 24702} []
   (let [puzzles (read-puzzles)]
     (print-puzzle (first puzzles))))

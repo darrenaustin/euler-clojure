@@ -1,5 +1,5 @@
 (ns dma.euler.p024
-  (:use dma.euler.numeric clojure.contrib.combinatorics))
+  (:use dma.euler.numeric clojure.math.combinatorics))
 
 ;; TODO: Ok, this is cheating.  I should really look into writing my
 ;; own perm method

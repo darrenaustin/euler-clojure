@@ -28,4 +28,4 @@
           m (reverse (range (dec (width m))))))
   
 (defn solution {:answer 260324} []
-  (apply min (column (propagate-min-path-sums *large-matrix*) 0)))
+  (apply min (column (propagate-min-path-sums large-matrix) 0)))

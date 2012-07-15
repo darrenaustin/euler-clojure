@@ -11,4 +11,4 @@
                       [line value]
                       [max-line max-value]))
                   (map-indexed (fn [line [base exp]] [line (* exp (Math/log base))]) pairs))]
-      (inc line))))(
+      (inc line))))

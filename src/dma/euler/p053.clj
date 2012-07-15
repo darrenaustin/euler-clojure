@@ -4,7 +4,7 @@
 (def fact (memoize factorial))
 
 (defn num-combos [n r]
-  (/ (fact n) (* (fact r) (fact (- n r)))))
+  (/ (fact n) (*' (fact r) (fact (-' n r)))))
 
 (defn solution {:answer 4075} []
   (count

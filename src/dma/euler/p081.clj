@@ -2,7 +2,7 @@
   (:use dma.euler.matrix))
 
 (defn solution {:answer 427337} []
-  (let [m *large-matrix* w (width m) h (height m)]
+  (let [m large-matrix w (width m) h (height m)]
     ;; Propagate the sum of the smallest path at each point by adding
     ;; the minimum of the down and right cells.  If we do this from the
     ;; bottom right and work our way up to the upper left (0, 0), then
